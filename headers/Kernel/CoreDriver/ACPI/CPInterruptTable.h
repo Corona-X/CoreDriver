@@ -14,31 +14,31 @@
 #define kCPInterruptRecordTypeIO                1
 #define kCPInterruptRecordTypeSourceOverride    2
 
-typedef struct {
+typedef OSPackedStructure() {
     CPSystemDescriptorTable();
     UInt32 localControllerAddress;
     UInt32 flags;
-} OSPackedStructure CPInterruptTable;
+} CPInterruptTable;
 
 typedef struct {
     UInt8 type;
     UInt8 length;
 } CPInterruptRecordInfo;
 
-typedef struct {
+typedef OSPackedStructure() {
     CPInterruptRecordInfo info;
     UInt8 processorID;
     UInt8 controllerID;
     UInt32 flags;
-} OSPackedStructure CPInterruptRecordLocal;
+} CPInterruptRecordLocal;
 
-typedef struct {
+typedef OSPackedStructure() {
     CPInterruptRecordInfo info;
     UInt8 controllerID;
     UInt8 reserved;
     UInt32 address;
     UInt32 interruptBase;
-} OSPackedStructure CPInterruptRecordIO;
+} CPInterruptRecordIO;
 
 OSShared void CPInterruptTableDumpControllers(const CPInterruptTable *table);
 

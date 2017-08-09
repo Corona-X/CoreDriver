@@ -10,7 +10,7 @@
 #include <Corona-X.h>
 #include <Kernel/CoreDriver/ACPI/CPBase.h>
 
-typedef struct {
+typedef OSPackedStructure() {
     UInt8 signature[8];
     UInt8 checksum;
     UInt8 manufacturerID[6];
@@ -20,11 +20,11 @@ typedef struct {
     OSAddress rootTableAddress;
     UInt8 extendedChecksum;
     UInt8 reserved[3];
-} OSPackedStructure CPRootDescriptor;
+} CPRootDescriptor;
 
-typedef struct {
+typedef OSPackedStructure() {
     CPSystemDescriptorTable();
-} OSPackedStructure CPRootTable;
+} CPRootTable;
 
 OSShared bool CPRootDescriptorValidate(const CPRootDescriptor *descriptor);
 OSShared CPRootTable *CPRootDescriptorGetRootTable(const CPRootDescriptor *descriptor);
