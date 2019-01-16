@@ -18,7 +18,7 @@ bool CPValidateChecksum(const UInt8 *data, OSCount from, OSCount to)
 
 bool CPValidateTable(const OSAddress base, OSUTF8Char signature[4])
 {
-    if (XKMemoryCompare(base, signature, 4))
+    if (CLMemoryCompare(base, signature, 4))
         return false;
 
     return CPValidateChecksum(base, 0, *((UInt32 *)(base + 4)));
@@ -49,7 +49,7 @@ void CPShutdownMachine(void)
             return false;
         }
 
-        defaultState.isRunningInVirtualMachine = XKMemoryCompare(rootDescriptor, "BOCHS ", 6);
+        defaultState.isRunningInVirtualMachine = CLMemoryCompare(rootDescriptor, "BOCHS ", 6);
         defaultState.rootTableDescriptor = rootDescriptor;
 
         XKLog(kXKLogLevelInfo, "Discovered valid ACPI Root Descriptor at %p\n", rootDescriptor);
@@ -76,7 +76,7 @@ void CPShutdownMachine(void)
 
         for (OSIndex i = 0; i < entryCount; i++)
         {
-            if (!XKStringCompare8(entries[i], KCPSignatureInterruptTable))
+            if (!CLStringCompare8(entries[i], KCPSignatureInterruptTable))
                 interruptEntry = i;
 
             XKLog(kXKLogLevelInfo, "%zu: %04s\n", i, entries[i]);

@@ -6,7 +6,7 @@ bool CPRootDescriptorValidate(const CPRootDescriptor *descriptor)
 {
     const static UInt8 signature[8] = kCPSignatureRootDescriptor;
     
-    if (XKMemoryCompare(descriptor->signature, signature, sizeof(signature)))
+    if (CLMemoryCompare(descriptor->signature, signature, sizeof(signature)))
         return false;
     
     if (descriptor->revision != kCPACPIRevision2) return false;
@@ -49,7 +49,7 @@ OSUTF8Char **CPRootTableGetEntryNames(const CPRootTable *table)
         entry >>= 32;
         
         entries[i] = XKAllocate(5).address;
-        XKMemoryCopy((OSAddress)entry, entries[i], 4);
+        CLMemoryCopy((OSAddress)entry, entries[i], 4);
         entries[i][4] = 0;
     }
     
